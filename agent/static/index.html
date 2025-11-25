@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dyagent 控制台</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__content">
+      <p class="eyebrow">电商智能工作台</p>
+      <h1>dyagent 前端面板</h1>
+      <p class="lede">快速配置需求、人群包与卖点，直接调用后端 /run 接口并可视化查看响应结果。</p>
+      <div class="hero__badges">
+        <span class="badge">画像分析</span>
+        <span class="badge">向量匹配</span>
+        <span class="badge">主图/视频生成</span>
+      </div>
+    </div>
+    <div class="hero__status">
+      <div class="status-card" id="healthStatus">检查服务状态中…</div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="card form-card">
+      <div class="card__header">
+        <div>
+          <p class="eyebrow">STEP 01</p>
+          <h2>提交需求</h2>
+          <p class="muted">填写产品目标、人群标签与卖点，系统会组装为 JSON payload 并调用 /run。</p>
+        </div>
+        <button class="ghost" id="loadSample">填充示例</button>
+      </div>
+
+      <form id="agentForm" class="grid">
+        <label class="field">
+          <span>业务目标</span>
+          <textarea id="goal" rows="2" placeholder="例如：提升抖音直播间 GMV，找出高转化的创意方向"></textarea>
+        </label>
+        <label class="field">
+          <span>产品与卖点</span>
+          <textarea id="product" rows="2" placeholder="例如：新款筋膜枪，主打静音与深层放松"></textarea>
+        </label>
+        <label class="field">
+          <span>人群标签 / 包描述</span>
+          <textarea id="audience" rows="2" placeholder="例如：25-35 岁都市白领，关注运动恢复，夜间刷抖音"></textarea>
+        </label>
+        <label class="field">
+          <span>其他约束 / 备注</span>
+          <textarea id="notes" rows="2" placeholder="例如：符合平台风控规范，突出质保与赠品"></textarea>
+        </label>
+
+        <div class="card__footer">
+          <div>
+            <p class="eyebrow">实时 Payload 预览</p>
+            <pre id="payloadPreview" class="code-block">{}</pre>
+          </div>
+          <div class="actions">
+            <button type="reset" class="ghost" id="clearForm">清空</button>
+            <button class="primary" type="submit">调用 /run</button>
+          </div>
+        </div>
+      </form>
+    </section>
+
+    <section class="card response-card">
+      <div class="card__header">
+        <div>
+          <p class="eyebrow">STEP 02</p>
+          <h2>响应结果</h2>
+          <p class="muted">展示后端返回的 JSON，便于继续链路（图像/视频生成、投放测试等）。</p>
+        </div>
+      </div>
+      <div class="response" id="responseOutput">等待调用…</div>
+    </section>
+
+    <section class="card log-card">
+      <div class="card__header">
+        <div>
+          <p class="eyebrow">RUN LOG</p>
+          <h2>调用记录</h2>
+          <p class="muted">每次调用都会保留摘要，方便快速回顾。</p>
+        </div>
+      </div>
+      <ul id="runLog" class="log"></ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>dyagent &bull; 轻量前端 · 与 FastAPI 后端同域部署</p>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
